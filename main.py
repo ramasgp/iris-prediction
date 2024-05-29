@@ -13,7 +13,7 @@ LABEL = ['Iris Setosa', "Iris Versicolor", "Iris Virginica"]
 
 @app.route('/')
 def index():
-    return render_template('index.html'), 200
+    return jsonify({"status": "SUCCESS", "message": "Success connect"}), 200
 
 @app.route('/predict', methods=["POST"])
 def predict():
@@ -25,8 +25,9 @@ def predict():
         pw = args.get('pw', default=0.0, type=float)
 
         if sl == 0.0 and sw == 0.0 and pl == 0.0 and pw == 0.0:
-            warning_message = "Prediksi gagal dilakukan atau input salah."
-            return render_template("index.html", prediction=warning_message), 400
+            return jsonify({"status": "FAILURE", 
+                            "message": "All input values are zero, which is not valid"
+                            }), 400
 
         new_data = [[sl, sw, pl, pw]]
         new_data = pd.DataFrame(new_data, columns=FEATURES)
@@ -43,13 +44,16 @@ def predict():
             "createdAt": createdAt
         }
 
-        # store_data(id, response)
+        store_data(id, response)
 
-        return render_template("index.html", prediction=res), 200
+        return jsonify({"status": "SUCCESS", 
+                        "data": response
+                        }), 200
     
     except Exception as e:
-        error_message = f"Terjadi kesalahan internal: {str(e)}"
-        return render_template("index.html", prediction=error_message), 500
+        return jsonify({"status": "ERROR", 
+                        "message": f"Internal error: {str(e)}"
+                        }), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080)
