@@ -6,33 +6,32 @@
     <meta charset="UTF-8" />
     <title>Flower Class Prediction</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+    <link rel="stylesheet" href="../static/style.css">
 </head>
 
 <body>
     <div class="container contact-form">
         <div class="contact-image">
-            <img src="{{ url_for('static', filename='img/sunflower.png') }}" />
+            <img src="../static/img/sunflower.png" />
         </div>
-        <form action="{{ url_for('predict')}}" method="post">
+        <form id="prediction-form" action="/predict" method="POST">
             <h3>Flower Class Prediction</h3>
             <div class="row">   
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" name="sl" class="form-control" placeholder="Sepal_Length"
+                        <input type="text" name="sl" id="sl" class="form-control" placeholder="Sepal_Length"
                             required="required" />
                     </div>
                     <div class="form-group">
-                        <input type="text" name="sw" class="form-control" placeholder="Sepal_Width"
+                        <input type="text" name="sw" id="sw" class="form-control" placeholder="Sepal_Width"
                             required="required" />
                     </div>
                     <div class="form-group">
-                        <input type="text" name="pl" class="form-control" placeholder="Petal_Length"
+                        <input type="text" name="pl" id="pl" class="form-control" placeholder="Petal_Length"
                             required="required" />
                     </div>
                     <div class="form-group">
-                        <input type="text" name="pw" class="form-control" placeholder="Petal_Width"
+                        <input type="text" name="pw" id="pw" class="form-control" placeholder="Petal_Width"
                             required="required" />
                     </div>
                     <button type="submit" class="btn btn-primary btn-block btn-large">
@@ -42,7 +41,7 @@
                 <div class="col-md-6">
                     <h3>
                         Hasil Prediksi : <br/>
-                        <p id="prediction-result"></p>
+                        <p id="prediction-result">{{ prediction_result }}</p>
                     </h3>
                 </div>
             </div>
@@ -51,7 +50,6 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="../services/api.js"></script>
-    <script src="../services/main.js"></script>
 </body>
 
 </html>

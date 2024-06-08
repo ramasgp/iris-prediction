@@ -1,4 +1,4 @@
-const BASE_URL = '##'; 
+const BASE_URL = 'http://127.0.0.1:8080'; 
 
 const ENDPOINT = {
   predict: `${BASE_URL}/predict`,
@@ -14,7 +14,13 @@ class PredictAPI {
       body: JSON.stringify(data)
     });
 
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
     const json = await response.json();
     return json;
   }
 }
+
+module.exports = PredictAPI;
