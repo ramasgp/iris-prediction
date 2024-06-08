@@ -18,11 +18,22 @@ def index():
 @app.route('/predict', methods=["POST"])
 def predict():
     try:
-        args = request.args
-        sl = args.get('sl', default=0.0, type=float)
-        sw = args.get('sw', default=0.0, type=float)
-        pl = args.get('pl', default=0.0, type=float)
-        pw = args.get('pw', default=0.0, type=float)
+        if not request.is_json:
+            return jsonify({"status": "FAILURE", 
+                            "message": "Request body must be JSON"
+                            }), 415
+
+        data = request.get_json()
+
+        if data is None:
+            return jsonify({"status": "FAILURE", 
+                            "message": "Received empty JSON"
+                            }), 400
+        
+        sl = data.get('sl', 0.0)
+        sw = data.get('sw', 0.0)
+        pl = data.get('pl', 0.0)
+        pw = data.get('pw', 0.0)
 
         if sl == 0.0 and sw == 0.0 and pl == 0.0 and pw == 0.0:
             return jsonify({"status": "FAILURE", 
