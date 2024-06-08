@@ -8,8 +8,8 @@ const Nunjucks = require("nunjucks");
 
 const init = async () => {
   const server = Hapi.server({
-    port: 9000,
-    host: "localhost",
+    port: 3000,
+    host: "0.0.0.0",
     routes: {
       cors: {
         origin: ["*"],
