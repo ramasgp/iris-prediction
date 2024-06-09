@@ -1,4 +1,4 @@
-const BASE_URL = 'http://127.0.0.1:8080'; 
+const BASE_URL = 'https://be-service-go6bb4rh2q-et.a.run.app'; 
 
 const ENDPOINT = {
   predict: `${BASE_URL}/predict`,
