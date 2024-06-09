@@ -1,5 +1,5 @@
 const Path = require("path");
-const handler = require("./handler.js");
+const handler = require("./services/handler.js");
 
 const routes = [
   {
