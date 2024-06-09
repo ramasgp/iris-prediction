@@ -9,9 +9,6 @@ ENV APP_HOME /app
 WORKDIR $APP_HOME
 COPY . ./
 
-# Salin semua file ke dalam direktori kerja di container
-
-
 # Install dependencies yang terdaftar di requirements.txt
 RUN pip install -r requirements.txt
 
