@@ -9,7 +9,7 @@ const Nunjucks = require("nunjucks");
 const init = async () => {
   const server = Hapi.server({
     port: process.env.PORT,
-    host: "0.0.0.0",
+    host: '0.0.0.0',
     routes: {
       cors: {
         origin: ["*"],
@@ -32,5 +32,8 @@ const init = async () => {
   await server.start();
   console.log(`Server berjalan pada ${server.info.uri}`);
 };
+process.on('unhandledRejection', (err) => {
+    console.log(err);
+});
 
 init();
